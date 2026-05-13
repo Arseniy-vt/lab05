@@ -43,26 +43,21 @@ jobs:
           
           cd build
           
-          echo "=== Найденные файлы .gcda ==="
-          find . -name "*.gcda"
-          
           echo "=== Генерация отчёта ==="
           gcovr \
             --root .. \
+            --filter 'Account\.cpp' \
+            --filter 'Transaction\.cpp' \
+            --exclude '.*build.*' \
+            --exclude '.*_deps.*' \
             --exclude '.*tests.*' \
             --gcov-ignore-parse-errors \
             --lcov \
             -o coverage.info \
             .
           
-          echo "=== Проверка coverage.info ==="
-          if [ -f coverage.info ]; then
-            echo "Файл создан, размер: $(wc -c < coverage.info) байт"
-            cat coverage.info
-          else
-            echo "Файл не создан!"
-            exit 1
-          fi
+          echo "=== coverage.info ==="
+          cat coverage.info
           
       - name: upload to coveralls
         if: runner.os == 'Linux'
@@ -70,3 +65,4 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           path-to-lcov: banking/build/coverage.info
+          ignore: "build/**,_deps/**,tests/**"
