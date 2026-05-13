@@ -102,3 +102,11 @@ TEST(TransactionTest, DestructorCoverage) {
     Account* acc = new Account(1, 100);
     delete acc;
 }
+
+TEST(TransactionTest, RealExecutionPath) {
+    Transaction tx;
+    Account from(1, 1000);
+    Account to(2, 1000);
+
+    EXPECT_TRUE(tx.Make(from, to, 100));
+}
