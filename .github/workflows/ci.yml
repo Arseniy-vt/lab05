@@ -18,7 +18,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: configure
-        run: cmake -S . -B build -DBUILD_TESTS=ON
+        run: cmake -S . -B build -DBUILD_TESTS=ON -DCODE_COVERAGE=ON
         working-directory: banking
 
       - name: build
@@ -34,3 +34,19 @@ jobs:
           fi
         shell: bash
         working-directory: banking
+
+      - name: install gcovr
+        if: runner.os == 'Linux'
+        run: pip install gcovr
+
+      - name: generate coverage
+        if: runner.os == 'Linux'
+        run: gcovr --lcov -o coverage.info .
+        working-directory: banking/build
+
+      - name: upload to coveralls
+        if: runner.os == 'Linux'
+        uses: coverallsapp/github-action@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path-to-lcov: ./banking/build/coverage.info
