@@ -19,9 +19,11 @@ jobs:
 
       - name: configure
         run: cmake -S . -B build -DBUILD_TESTS=ON
+        working-directory: banking
 
       - name: build
         run: cmake --build build --config Release
+        working-directory: banking
 
       - name: run tests
         run: |
@@ -31,3 +33,4 @@ jobs:
             ./build/tests
           fi
         shell: bash
+        working-directory: banking
