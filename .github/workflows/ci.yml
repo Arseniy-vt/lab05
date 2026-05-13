@@ -34,9 +34,10 @@ jobs:
           gcovr \
             --filter 'Account\.cpp$' \
             --filter 'Transaction\.cpp$' \
+            --gcov-ignore-parse-errors \
             --exclude-unreachable-branches \
             --exclude-throw-branches \
-            --gcov-ignore-parse-errors \
+            --exclude-lines-by-pattern '.*assert.*' \
             --lcov \
             -o coverage.info \
             .
