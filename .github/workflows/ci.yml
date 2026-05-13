@@ -41,12 +41,12 @@ jobs:
 
       - name: generate coverage
         if: runner.os == 'Linux'
-        run: gcovr --lcov -o coverage.info .
-        working-directory: banking/build
+        working-directory: banking
+        run: gcovr --lcov --root . -o build/coverage.info build
 
       - name: upload to coveralls
         if: runner.os == 'Linux'
         uses: coverallsapp/github-action@v2
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          path-to-lcov: ./banking/build/coverage.info
+          path-to-lcov: banking/build/coverage.info
