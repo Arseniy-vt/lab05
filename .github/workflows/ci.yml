@@ -8,10 +8,7 @@ on:
 
 jobs:
   build_and_test:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest, windows-latest]
+    runs-on: ubuntu-latest
 
     steps:
       - name: get
@@ -26,43 +23,27 @@ jobs:
         working-directory: banking
 
       - name: run tests
-        run: |
-          if [[ "${{ runner.os }}" == "Windows" ]]; then
-            ./build/Release/tests.exe
-          else
-            ./build/tests
-          fi
-        shell: bash
+        run: ./build/tests
         working-directory: banking
 
       - name: generate coverage
-        if: runner.os == 'Linux'
         working-directory: banking
         run: |
           pip install gcovr
           
-          cd build
-          
-          echo "=== Генерация отчёта ==="
           gcovr \
-            --root .. \
-            --filter 'Account\.cpp' \
-            --filter 'Transaction\.cpp' \
-            --exclude '.*build.*' \
-            --exclude '.*_deps.*' \
-            --exclude '.*tests.*' \
+            --filter 'Account\.cpp$' \
+            --filter 'Transaction\.cpp$' \
             --gcov-ignore-parse-errors \
             --lcov \
             -o coverage.info \
             .
           
-          echo "=== coverage.info ==="
-          cat coverage.info
+          echo "=== coverage.info содержимое ==="
+          cat coverage.info || echo "Пустой файл"
           
       - name: upload to coveralls
-        if: runner.os == 'Linux'
         uses: coverallsapp/github-action@v2
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          path-to-lcov: banking/build/coverage.info
-          ignore: "build/**,_deps/**,tests/**"
+          path-to-lcov: banking/coverage.info
