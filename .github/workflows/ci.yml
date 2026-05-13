@@ -19,7 +19,7 @@ jobs:
         working-directory: banking
 
       - name: build
-        run: cmake --build build --config Release
+        run: cmake --build build --config Debug
         working-directory: banking
 
       - name: run tests
