@@ -46,8 +46,7 @@ jobs:
           gcovr \
             --root . \
             --filter '.*\.cpp' \
-            --exclude '.*build.*' \
-            --exclude '.*tests.*' \
+            --gcov-ignore-parse-errors \
             --lcov \
             -o build/coverage.info \
             .
