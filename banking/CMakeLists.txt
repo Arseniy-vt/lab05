@@ -34,4 +34,7 @@ if(BUILD_TESTS)
     
     include(GoogleTest)
     gtest_discover_tests(tests)
+
+    target_compile_definitions(banking PRIVATE DEBUG)
+    target_compile_definitions(tests PRIVATE DEBUG)
 endif()
