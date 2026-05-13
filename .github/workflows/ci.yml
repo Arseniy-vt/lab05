@@ -42,7 +42,15 @@ jobs:
       - name: generate coverage
         if: runner.os == 'Linux'
         working-directory: banking
-        run: gcovr --lcov --root . -o build/coverage.info build
+        run: |
+          gcovr \
+            --root . \
+            --filter '.*\.cpp' \
+            --exclude '.*build.*' \
+            --exclude '.*tests.*' \
+            --lcov \
+            -o build/coverage.info \
+            .
 
       - name: upload to coveralls
         if: runner.os == 'Linux'
