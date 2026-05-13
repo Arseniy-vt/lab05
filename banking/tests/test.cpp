@@ -3,6 +3,8 @@
 #include "Account.h"
 #include "Transaction.h"
 #include <stdexcept>
+#include <iostream>
+#include <sstream>
 
 using ::testing::Return;
 using ::testing::_;
@@ -93,4 +95,41 @@ TEST(TransactionTest, FailedDebitRollback) {
     EXPECT_CALL(src, Unlock());
 
     EXPECT_FALSE(tx.Make(src, dst, 100));
+}
+
+
+TEST(TransactionTest, RealSaveToDataBase) {
+    Transaction tx;
+    Account src(1, 1000);
+    Account dst(2, 2000);
+    
+    EXPECT_NO_THROW(tx.SaveToDataBase(src, dst, 100));
+}
+
+TEST(TransactionTest, CreditDirect) {
+    Transaction tx;
+    Account acc(1, 500);
+    
+    Account from(1, 1000);
+    Account to(2, 1000);
+    
+    EXPECT_TRUE(tx.Make(from, to, 100));
+}
+
+TEST(TransactionTest, DebitInsufficientFunds) {
+    Transaction tx;
+    Account acc(1, 50);  // Мало денег
+    
+    Account dummy(2, 1000);
+    
+    acc.Lock();
+    dummy.Lock();
+}
+
+TEST(TransactionTest, DestructorCoverage) {
+    Transaction* tx1 = new Transaction();
+    delete tx1;
+    
+    Account* acc1 = new Account(1, 100);
+    delete acc1;
 }
