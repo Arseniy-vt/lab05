@@ -25,6 +25,13 @@ if(BUILD_TESTS)
     add_executable(tests tests/test.cpp)
     target_link_libraries(tests banking GTest::gtest_main GTest::gmock_main)
     
+    if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
+        target_compile_options(banking PRIVATE --coverage -fprofile-arcs -ftest-coverage)
+        target_link_options(banking PRIVATE --coverage)
+        target_compile_options(tests PRIVATE --coverage -fprofile-arcs -ftest-coverage)
+        target_link_options(tests PRIVATE --coverage)
+    endif()
+    
     include(GoogleTest)
     gtest_discover_tests(tests)
 endif()
