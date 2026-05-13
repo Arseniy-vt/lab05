@@ -1,0 +1,33 @@
+name: CI CMake
+
+on:
+  push:
+    branches: ["master"]
+  pull_request:
+    branches: ["master"]
+
+jobs:
+  build_and_test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+
+    steps:
+      - name: get
+        uses: actions/checkout@v4
+
+      - name: configure
+        run: cmake -S . -B build -DBUILD_TESTS=ON
+
+      - name: build
+        run: cmake --build build --config Release
+
+      - name: run tests
+        run: |
+          if [[ "${{ runner.os }}" == "Windows" ]]; then
+            ./build/Release/tests.exe
+          else
+            ./build/tests
+          fi
+        shell: bash
