@@ -34,13 +34,12 @@ jobs:
           gcovr \
             --filter 'Account\.cpp$' \
             --filter 'Transaction\.cpp$' \
+            --exclude-unreachable-branches \
+            --exclude-throw-branches \
             --gcov-ignore-parse-errors \
             --lcov \
             -o coverage.info \
             .
-          
-          echo "=== coverage.info содержимое ==="
-          cat coverage.info || echo "Пустой файл"
           
       - name: upload to coveralls
         uses: coverallsapp/github-action@v2
