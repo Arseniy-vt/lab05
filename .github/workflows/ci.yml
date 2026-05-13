@@ -35,36 +35,34 @@ jobs:
         shell: bash
         working-directory: banking
 
-      # ============================================
-      # Генерация покрытия (только Linux)
-      # ============================================
       - name: generate coverage
         if: runner.os == 'Linux'
         working-directory: banking
         run: |
-          # Устанавливаем gcovr
           pip install gcovr
           
-          # Генерируем отчёт
-          # Важно: запускаем из папки build, где лежат .gcda файлы
           cd build
           
-          # Показываем какие файлы покрытия найдены
           echo "=== Найденные файлы .gcda ==="
           find . -name "*.gcda"
           
           echo "=== Генерация отчёта ==="
           gcovr \
             --root .. \
-            --filter 'Account\.cpp' \
-            --filter 'Transaction\.cpp' \
+            --exclude '.*tests.*' \
             --gcov-ignore-parse-errors \
             --lcov \
             -o coverage.info \
             .
           
           echo "=== Проверка coverage.info ==="
-          cat coverage.info
+          if [ -f coverage.info ]; then
+            echo "Файл создан, размер: $(wc -c < coverage.info) байт"
+            cat coverage.info
+          else
+            echo "Файл не создан!"
+            exit 1
+          fi
           
       - name: upload to coveralls
         if: runner.os == 'Linux'
