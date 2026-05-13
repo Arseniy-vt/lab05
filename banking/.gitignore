@@ -1,0 +1,21 @@
+# CMake
+build/
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+
+# Тестовые артефакты
+*.gcno
+*.gcda
+coverage/
+*.gcov
+*.info
+coverage.html
+coverage.xml
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
