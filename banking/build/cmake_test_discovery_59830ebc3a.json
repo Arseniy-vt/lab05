@@ -1,0 +1,53 @@
+{
+  "tests": 7,
+  "name": "AllTests",
+  "testsuites": [
+    {
+      "name": "AccountTest",
+      "tests": 3,
+      "testsuite": [
+        {
+          "name": "Initialization",
+          "file": "\/home\/kali1\/lab05\/lab05\/banking\/tests\/test.cpp",
+          "line": 24
+        },
+        {
+          "name": "LockUnlockOperations",
+          "file": "\/home\/kali1\/lab05\/lab05\/banking\/tests\/test.cpp",
+          "line": 30
+        },
+        {
+          "name": "BalanceModification",
+          "file": "\/home\/kali1\/lab05\/lab05\/banking\/tests\/test.cpp",
+          "line": 37
+        }
+      ]
+    },
+    {
+      "name": "TransactionTest",
+      "tests": 4,
+      "testsuite": [
+        {
+          "name": "FeeConfiguration",
+          "file": "\/home\/kali1\/lab05\/lab05\/banking\/tests\/test.cpp",
+          "line": 45
+        },
+        {
+          "name": "ValidationErrors",
+          "file": "\/home\/kali1\/lab05\/lab05\/banking\/tests\/test.cpp",
+          "line": 52
+        },
+        {
+          "name": "SuccessfulTransfer",
+          "file": "\/home\/kali1\/lab05\/lab05\/banking\/tests\/test.cpp",
+          "line": 64
+        },
+        {
+          "name": "FailedDebitRollback",
+          "file": "\/home\/kali1\/lab05\/lab05\/banking\/tests\/test.cpp",
+          "line": 81
+        }
+      ]
+    }
+  ]
+}

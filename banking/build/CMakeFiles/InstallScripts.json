@@ -1,0 +1,10 @@
+{
+	"InstallScripts" : 
+	[
+		"/home/kali1/lab05/lab05/banking/build/cmake_install.cmake",
+		"/home/kali1/lab05/lab05/banking/build/_deps/googletest-build/cmake_install.cmake",
+		"/home/kali1/lab05/lab05/banking/build/_deps/googletest-build/googlemock/cmake_install.cmake",
+		"/home/kali1/lab05/lab05/banking/build/_deps/googletest-build/googletest/cmake_install.cmake"
+	],
+	"Parallel" : false
+}
