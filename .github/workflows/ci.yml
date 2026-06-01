@@ -26,13 +26,12 @@ jobs:
         run: ./tests/build/tests
         working-directory: .
 
-      - name: generate coverage
+      - name: Generate coverage
         working-directory: .
         run: |
           pip install gcovr
           gcovr \
             --root . \
-            --filter 'banking/.*\.cpp' \
             --exclude 'tests/.*' \
             --lcov \
             -o coverage.info \
