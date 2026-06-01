@@ -26,20 +26,17 @@ jobs:
         run: ./tests/build/tests
         working-directory: .
 
-      - name: Generate coverage
+      - name: generate coverage
         working-directory: .
         run: |
           pip install gcovr
           gcovr \
             --root . \
+            --filter 'banking/.*\.cpp' \
+            --exclude 'tests/.*' \
             --lcov \
             -o coverage.info \
             tests/build
-          
-          # Проверяем, что файл не пустой
-          echo "=== Coverage info content ==="
-          cat coverage.info
-          wc -l coverage.info
 
       - name: upload to coveralls
         uses: coverallsapp/github-action@v2
