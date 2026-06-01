@@ -32,15 +32,13 @@ jobs:
           pip install gcovr
           gcovr \
             --root . \
-            --search-path tests/build \
-            --filter 'Account\.cpp$' \
-            --filter 'Transaction\.cpp$' \
-            --gcov-ignore-parse-errors \
+            --filter 'banking/Account\.cpp' \
+            --filter 'banking/Transaction\.cpp' \
             --exclude-unreachable-branches \
             --exclude-throw-branches \
-            --exclude-lines-by-pattern '.*assert.*' \
             --lcov \
-            -o coverage.info
+            -o coverage.info \
+            tests/build
 
       - name: upload to coveralls
         uses: coverallsapp/github-action@v2
