@@ -39,7 +39,7 @@ jobs:
             --exclude-lines-by-pattern '.*assert.*' \
             --lcov \
             -o coverage.info \
-            tests/build/banking_build
+            tests/build/banking_build/CMakeFiles/banking.dir
 
       - name: upload to coveralls
         uses: coverallsapp/github-action@v2
