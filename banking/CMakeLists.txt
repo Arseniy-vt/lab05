@@ -8,7 +8,6 @@ project(banking)
 add_library(banking STATIC Account.cpp Transaction.cpp)
 target_include_directories(banking PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
-# Опционально: можно добавить флаги покрытия здесь, но лучше в тестах
 if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
     target_compile_options(banking PRIVATE --coverage -fprofile-arcs -ftest-coverage)
     target_link_options(banking PRIVATE --coverage)
