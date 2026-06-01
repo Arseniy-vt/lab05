@@ -10,5 +10,4 @@
 3. Настройте сборочную процедуру на **Github Actions**.
 4. Настройте [Coveralls.io](https://coveralls.io/).
 
-[![Coverage Status](https://coveralls.io/repos/github/Arseniy-vt/lab05/badge.svg?branch=master)](https://coveralls.io/github/Arseniy-vt/lab05?branch=master)
 https://coveralls.io/github/Arseniy-vt/lab05
